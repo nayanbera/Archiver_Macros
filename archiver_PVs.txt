@@ -1,0 +1,76 @@
+#Undulator
+Beam-Current = S:SRcurrentAI
+Undulator-gap = ID15:Gap
+Undulator-Energy = ID15:Energy
+Undulator-Harmonic = ID15:HarmonicValue
+Undulator-Total-Power = ID15:TotalPower
+Undulator-Message = ID15:Message1
+
+#Ion_Gauges
+IG00 = 15IDA:hc0
+IG01 = 15IDA:hc1
+IG02 = 15IDA:hc2
+IG03 = 15IDA:hc3
+IG04 = 15IDA:hc4
+
+#HHL_Slits
+HHL-Hor-Slit-Up = 15IDA:m17 (motor)
+HHL-Vert-Slit-Up = 15IDA:m18 (motor)
+HHL-Hor-Slit-Dwn = 15IDA:m19 (motor)
+HHL-Vert-Slit-Dwn = 15IDA:m20 (motor)
+
+#Monochromator
+Bragg-H = 5IDA:BraggHAO
+Bragg-K = 15IDA:BraggKAO
+Bragg-L = 15IDA:BraggLAO
+Bragg-a = 15IDA:BraggAAO
+Bragg-2d = 15IDA:Bragg2dSpacingAO
+Bragg-Type = 15IDA:BraggTypeMO
+Energy = BraggERdbkAO
+Lambda = BraggLambdaRdbkAO
+Theta = BraggThetaRdbkAO
+1st-Xtal-Roll = 15IDA:m1 (motor)
+2nd-Xtal-Roll = 15IDA:m2 (motor)
+2nd-Xtal-Pitch = 15IDA:m3 (motor)
+Hor-Xtal-Change = 15IDA:m9 (motor)
+Bragg-Angle = 15IDA:m10 (motor)
+Xtal-Gap = 15IDA:m11 (motor)
+
+#Mirror_Slits
+UHV-Slit-top = 15IDA:m25 (motor)
+UHV-Slit-Bot = 15IDA:m26 (motor)
+UHV-Slit-InB = 15IDA:m27 (motor)
+UHV-Slit-OutB = 15IDA:m28 (motor)
+
+#Mirror
+VFM-Vertical = 15IDA:m4 (motor)
+VFM-VDM-Stripe = 15IDA:m5 (motor)
+VFM-Pitch = 15IDA:m6 (motor)
+VDM-Vertical = 15IDA:m7 (motor)
+VDM-Pitch = 15IDA:m8 (motor)
+
+#Bimorph_Voltages
+Channel00 = Bimorph_VFM:GET-VOUT00
+Channel01 = Bimorph_VFM:GET-VOUT01
+Channel02 = Bimorph_VFM:GET-VOUT02
+Channel03 = Bimorph_VFM:GET-VOUT03
+Channel04 = Bimorph_VFM:GET-VOUT04
+Channel05 = Bimorph_VFM:GET-VOUT05
+Channel06 = Bimorph_VFM:GET-VOUT06
+Channel07 = Bimorph_VFM:GET-VOUT07
+Channel08 = Bimorph_VFM:GET-VOUT08
+Channel09 = Bimorph_VFM:GET-VOUT09
+Channel10 = Bimorph_VFM:GET-VOUT10
+Channel11 = Bimorph_VFM:GET-VOUT11
+Channel12 = Bimorph_VFM:GET-VOUT12
+Channel13 = Bimorph_VFM:GET-VOUT13
+Channel14 = Bimorph_VFM:GET-VOUT14
+Channel15 = Bimorph_VFM:GET-VOUT15
+
+
+
+
+
+
+
+

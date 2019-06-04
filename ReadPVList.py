@@ -1,0 +1,115 @@
+import os
+
+
+class ReadPVList(object):
+    def __init__(self,fname=None):
+        self.motorParams={'User':'RBV','Dial':'DRBV','Offset':'OFF','Direction':'DIR','MotorPos':'RMP',
+                          'EncoderPos':'REP',
+                          'UseEncoder':'UEIP',
+                          'MotorRes':'MRES',
+                          'EncoderRes':'ERES'}
+        self.data_server='http://chemmat71.cars.aps.anl.gov:17668'
+        self.webpath=self.data_server+'/retrieval/ui/'
+        self.href = self.data_server+"/retrieval/ui/viewer/archViewer.html?pv="
+        if fname is not None:
+            if os.path.exists(fname):
+                self.pvList={}
+                self.checkMotor={}
+                self.pvAll=[]
+                self.categories=[]
+                self.pvListFileName=fname
+                self.parseFile()
+        headerfh=open('page-header.txt','r')
+        self.headertxt=headerfh.readlines()
+        headerfh.close()
+        footerfh=open('page-footer.txt','r')
+        self.footertxt=footerfh.readlines()
+        footerfh.close()
+
+
+
+    def parseFile(self):
+        fh=open(self.pvListFileName,mode='r')
+        lines=fh.readlines()
+        for line in lines:
+            if line[0]=='#':
+                self.categories.append(line[1:].strip())
+                self.pvList[self.categories[-1]]={}
+            else:
+                if line.strip()!='':
+                    pvName,val=line.strip().split('=')
+                    mot=val.split('(')
+                    try:
+                        if mot[1][:-1].strip()=='motor':
+                            self.checkMotor[pvName.strip()]=True
+                    except:
+                        self.checkMotor[pvName.strip()]=False
+                    if self.checkMotor[pvName.strip()]:
+                        self.pvList[self.categories[-1]][pvName.strip()]={}
+                        for key in self.motorParams.keys():
+                            self.pvList[self.categories[-1]][pvName.strip()][key]=mot[0].strip()+'.'+self.motorParams[key]
+                            self.pvAll.append(mot[0].strip()+'.'+self.motorParams[key])
+                    else:
+                        self.pvList[self.categories[-1]][pvName.strip()]=mot[0].strip()
+                        self.pvAll.append(mot[0].strip())
+            self.pvNum=len(self.pvAll)
+
+    def create_htmls(self):
+        sidebartxt = '<!-- Sidebar -->\n<div class="w3-sidebar w3-light-grey w3-bar-block" style="width:10%">\n <h3 class="w3-bar-item">Categories</h3>\n'
+        for category in self.pvList.keys(): #For creating sidebar
+            sidebartxt += ' <a href="%s%s.html" class="w3-bar-item w3-button">%s</a>\n' % (self.webpath,category,category)
+        sidebartxt +='</div>\n\n'
+        for category in self.pvList.keys():
+            fh=open('./chemmat/'+category+'.html','w')
+            fh.writelines(self.headertxt)
+            fh.writelines(sidebartxt)
+            fh.write('\n<!-- Page Content -->\n')
+            fh.writelines('<div style="margin-left:10%">\n<div class="w3-container w3-teal">\n<h1>ChemMatCARS '
+                          'Archiver Appliance</h1></div>\n<div class="w3-container">\n\n')
+            fh.write('\n')
+            motortxt = '<h2>Motor PVs</h2>\n'
+            motortxt +='<table cellspacing = 5>\n'
+            pvtxt = '<h2>Other PVs</h2>\n'
+            pvtxt += '<table cellspacing = 5>\n'
+            allotxt=''
+            onum=0
+            for pv in self.pvList[category].keys():
+                if not self.checkMotor[pv]:
+                    pvtxt += '<tr>\n'
+                    allotxt+=self.pvList[category][pv]+'&pv='
+                    pvtxt+='<td><a href="'+self.href+self.pvList[category][pv]+'">'+pv+'</a></td>\n'
+                    pvtxt += '</tr>\n\n'
+                    onum+=1
+                else:
+                    motortxt += '<tr>\n'
+                    motortxt += '<td>'+pv+'</td>\n'
+                    alltxt=''
+                    for key in self.motorParams.keys():
+                        alltxt+=self.pvList[category][pv][key]+'&pv='
+                        motortxt+='<td><a href="'+self.href+self.pvList[category][pv][key]+'">'+key+'</a></td>\n'
+                    motortxt += '<td><a href="' + self.href +alltxt[:-4]+ '">All</a></td>\n'
+                    motortxt+='</tr>\n\n'
+            if onum>0:
+            	pvtxt+='<td><a href="'+self.href+allotxt[:-4]+'">All</a></td>\n'
+            motortxt+='</table>\n'
+            fh.write(motortxt)
+            fh.write('\n')
+            fh.write(pvtxt)
+            fh.writelines(self.footertxt)
+            fh.close()
+            print('Created %s.html'%category)
+
+
+
+if __name__=="__main__":
+    ReadPV=ReadPVList(fname='archiver_PVs.txt')
+    fh=open('generated_pvList.txt','w')
+    for item in ReadPV.pvAll:
+        fh.write(item+'\n')
+        print(item)
+    fh.close()
+    print(ReadPV.pvNum)
+    ReadPV.create_htmls()
+
+
+
