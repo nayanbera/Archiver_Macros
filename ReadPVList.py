@@ -10,6 +10,7 @@ class ReadPVList(object):
                           'EncoderRes':'ERES'}
         self.data_server='http://chemmat71.cars.aps.anl.gov:17668'
         self.webpath=self.data_server+'/retrieval/ui/'
+        self.htmlfolder='/opt/archappl/retrieval/webapps/retrieval/ui/'
         self.href = self.data_server+"/retrieval/ui/viewer/archViewer.html?pv="
         if fname is not None:
             if os.path.exists(fname):
@@ -55,32 +56,53 @@ class ReadPVList(object):
             self.pvNum=len(self.pvAll)
 
     def create_htmls(self):
-        sidebartxt = '<!-- Sidebar -->\n<div class="w3-sidebar w3-light-grey w3-bar-block" style="width:10%">\n <h3 class="w3-bar-item">Categories</h3>\n'
+        sidebartxt = '<!-- Sidebar -->\n<div class="w3-sidebar w3-light-grey w3-bar-block" style="width:10%">\n <h2 ' \
+                     'class="w3-bar-item">Categories</h2>\n'
         for category in self.pvList.keys(): #For creating sidebar
             sidebartxt += ' <a href="%s%s.html" class="w3-bar-item w3-button">%s</a>\n' % (self.webpath,category,category)
         sidebartxt +='</div>\n\n'
+
+        fh2 = open(self.htmlfolder + 'index.html', 'w')
+        fh2.writelines(self.headertxt)
+        fh2.writelines(sidebartxt)
+        fh2.write('\n<!-- Page Content -->\n')
+        fh2.writelines('<div style="margin-left:10%">\n<div class="w3-container w3-teal">\n<h1>ChemMatCARS '
+                       'Archiver Appliance</h1></div>\n<div class="w3-container">\n\n')
+        fh2.write('<h2>Welcome to ChemMatCARS Archiver</h2>\n')
+        fh2.write('<p>Please click on the sidebar items to look into the archived PVs. In order to '
+                      'add/remove/update any PVs please contact Mrinal Bera.</p>\n')
+        fh2.write('\n')
+        fh2.writelines(self.footertxt)
+        fh2.close()
+
         for category in self.pvList.keys():
-            fh=open('./chemmat/'+category+'.html','w')
+            fh=open(self.htmlfolder+category+'.html','w')
+
             fh.writelines(self.headertxt)
             fh.writelines(sidebartxt)
             fh.write('\n<!-- Page Content -->\n')
             fh.writelines('<div style="margin-left:10%">\n<div class="w3-container w3-teal">\n<h1>ChemMatCARS '
                           'Archiver Appliance</h1></div>\n<div class="w3-container">\n\n')
             fh.write('\n')
-            motortxt = '<h2>Motor PVs</h2>\n'
+
+            motortxt = '<h2>Archived Motor PVs</h2>\n'
             motortxt +='<table cellspacing = 5>\n'
-            pvtxt = '<h2>Other PVs</h2>\n'
+            pvtxt = '<h2>Archived PVs</h2>\n'
             pvtxt += '<table cellspacing = 5>\n'
             allotxt=''
             onum=0
+            otherPV=False
+            motorPV=False
             for pv in self.pvList[category].keys():
-                if not self.checkMotor[pv]:
+                if not self.checkMotor[pv]: #For PVs other than motors
+                    otherPV=True
                     pvtxt += '<tr>\n'
                     allotxt+=self.pvList[category][pv]+'&pv='
                     pvtxt+='<td><a href="'+self.href+self.pvList[category][pv]+'">'+pv+'</a></td>\n'
                     pvtxt += '</tr>\n\n'
                     onum+=1
                 else:
+                    motorPV=True
                     motortxt += '<tr>\n'
                     motortxt += '<td>'+pv+'</td>\n'
                     alltxt=''
@@ -92,12 +114,15 @@ class ReadPVList(object):
             if onum>0:
             	pvtxt+='<td><a href="'+self.href+allotxt[:-4]+'">All</a></td>\n'
             motortxt+='</table>\n'
-            fh.write(motortxt)
+            if motorPV:
+                fh.write(motortxt)
             fh.write('\n')
-            fh.write(pvtxt)
+            if otherPV:
+                fh.write(pvtxt)
             fh.writelines(self.footertxt)
             fh.close()
-            print('Created %s.html'%category)
+
+            #print('Created %s.html'%category)
 
 
 
@@ -106,9 +131,7 @@ if __name__=="__main__":
     fh=open('generated_pvList.txt','w')
     for item in ReadPV.pvAll:
         fh.write(item+'\n')
-        print(item)
     fh.close()
-    print(ReadPV.pvNum)
     ReadPV.create_htmls()
 
 
