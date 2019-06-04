@@ -1,5 +1,5 @@
 #How to use the Macro
 1) Add/edit the PVs in 'archiver_PVs.txt' file
     Note: For adding any motor please add '(motor)' at the end of the line
-2) Run the follwing as a root:
+2) Run the following as a root:
     python ReadPVList.py
