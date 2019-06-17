@@ -1,4 +1,4 @@
-#Undulator
+#15IDA-Undulator
 Beam-Current = S:SRcurrentAI
 Undulator-gap = ID15:Gap
 Undulator-Energy = ID15:Energy
@@ -6,20 +6,45 @@ Undulator-Harmonic = ID15:HarmonicValue
 Undulator-Total-Power = ID15:TotalPower
 Undulator-Message = ID15:Message1
 
-#Ion_Gauges
+#15IDA-Ion_Gauges
 IG00 = 15IDA:hc0
 IG01 = 15IDA:hc1
 IG02 = 15IDA:hc2
 IG03 = 15IDA:hc3
 IG04 = 15IDA:hc4
 
-#HHL_Slits
+#15IDA-Temperatures
+1st-Crystal-InB(Si-311) = 15ID:BLEPS:TEMP1_CURRENT
+1st-Crystal-OutB(Si-111) = 15ID:BLEPS:TEMP2_CURRENT
+2nd-Crystal-InB(Si-311) = 15ID:BLEPS:TEMP3_CURRENT
+2nd-Crystal-OutB(Si-111) = 15ID:BLEPS:TEMP4_CURRENT
+Compton-Shielding-InB = 15ID:BLEPS:TEMP5_CURRENT
+Compton-Shielding-OutB = 15ID:BLEPS:TEMP6_CURRENT
+1st-Xtal-Cu-Shield-InB = 15ID:BLEPS:TEMP7_CURRENT
+1st-Xtal-Cu-Shield-OutB = 15ID:BLEPS:TEMP8_CURRENT
+1st-Xtal-LN2-In = 15ID:BLEPS:TEMP9_CURRENT
+1st-Xtal-LN2-Out = 15ID:BLEPS:TEMP10_CURRENT
+H2O-Therm-Stab = 15ID:BLEPS:TEMP11_CURRENT
+2nd-Crystal-Shield = 15ID:BLEPS:TEMP12_CURRENT
+1st-Thermo-Insulated-Plate = 15ID:BLEPS:TEMP13_CURRENT
+Pitch2-Movable-Arm = 15ID:BLEPS:TEMP14_CURRENT
+Roll2-Movable-Arm = 15ID:BLEPS:TEMP15_CURRENT
+
+
+#15IDA-Gate_Valves
+GV-1 = 15ID:BLEPS:GV1_OPENED_LS
+GV-2 = 15ID:BLEPS:GV2_OPENED_LS
+GV-3 = 15ID:BLEPS:GV3_OPENED_LS
+GV-4 = 15ID:BLEPS:GV4_OPENED_LS
+
+
+#15IDA-HHL_Slits
 HHL-Hor-Slit-Up = 15IDA:m17 (motor)
 HHL-Vert-Slit-Up = 15IDA:m18 (motor)
 HHL-Hor-Slit-Dwn = 15IDA:m19 (motor)
 HHL-Vert-Slit-Dwn = 15IDA:m20 (motor)
 
-#Monochromator
+#15IDA-Monochromator
 Bragg-H = 5IDA:BraggHAO
 Bragg-K = 15IDA:BraggKAO
 Bragg-L = 15IDA:BraggLAO
@@ -29,6 +54,7 @@ Bragg-Type = 15IDA:BraggTypeMO
 Energy = BraggERdbkAO
 Lambda = BraggLambdaRdbkAO
 Theta = BraggThetaRdbkAO
+Mono-Temp = 15IDA:D1Dmm_calc
 1st-Xtal-Roll = 15IDA:m1 (motor)
 2nd-Xtal-Roll = 15IDA:m2 (motor)
 2nd-Xtal-Pitch = 15IDA:m3 (motor)
@@ -36,20 +62,20 @@ Hor-Xtal-Change = 15IDA:m9 (motor)
 Bragg-Angle = 15IDA:m10 (motor)
 Xtal-Gap = 15IDA:m11 (motor)
 
-#Mirror_Slits
+#15IDA-Mirror_Slits
 UHV-Slit-top = 15IDA:m25 (motor)
 UHV-Slit-Bot = 15IDA:m26 (motor)
 UHV-Slit-InB = 15IDA:m27 (motor)
 UHV-Slit-OutB = 15IDA:m28 (motor)
 
-#Mirror
+#15IDA-Mirror
 VFM-Vertical = 15IDA:m4 (motor)
 VFM-VDM-Stripe = 15IDA:m5 (motor)
 VFM-Pitch = 15IDA:m6 (motor)
 VDM-Vertical = 15IDA:m7 (motor)
 VDM-Pitch = 15IDA:m8 (motor)
 
-#Bimorph_Voltages
+#15IDA-Bimorph_Voltages
 Channel00 = Bimorph_VFM:GET-VOUT00
 Channel01 = Bimorph_VFM:GET-VOUT01
 Channel02 = Bimorph_VFM:GET-VOUT02
@@ -66,6 +92,100 @@ Channel12 = Bimorph_VFM:GET-VOUT12
 Channel13 = Bimorph_VFM:GET-VOUT13
 Channel14 = Bimorph_VFM:GET-VOUT14
 Channel15 = Bimorph_VFM:GET-VOUT15
+
+#15IDB-CRL
+CRL-mAX = 15IDB:m57 (motor)
+CRL-mAY = 15IDB:m58 (motor)
+CRL-mX = 15IDB:m59 (motor)
+CRL-mY = 15IDB:m60 (motor)
+CRL-C1-Len1 = 15IDB:m41 (motor)
+CRL-C1-Len2 = 15IDB:m42 (motor)
+CRL-C1-Len3 = 15IDB:m43 (motor)
+CRL-C1-Len4 = 15IDB:m44 (motor)
+CRL-C1-Len5 = 15IDB:m45 (motor)
+CRL-C1-Len6 = 15IDB:m46 (motor)
+CRL-C1-Len7 = 15IDB:m47 (motor)
+CRL-C2-Len4 = 15IDB:m48 (motor)
+
+#15IDC-HHRM
+M_1st_Pitch = 15IDC:m65 (motor)
+M_2nd_Pitch = 15IDC:m66 (motor)
+M_1st_Height = 15IDC:m67 (motor)
+M_2nd_Height = 15IDC:m24 (motor)
+M_Trans = 15IDC:m69 (motor)
+
+#15IDC-Three_Circle
+Mono_Y = 15IDC:m18 (motor)
+Jack_U = 15IDC:m20 (motor)
+Jack_D = 15IDC:m19 (motor)
+TwoTheta = 15IDC:m26 (motor)
+Base_Xt = 15IDC:m17 (motor)
+Th = XPS1:m1 (motor)
+Phi = XPS1:m2 (motor)
+Chi = XPS1:m3 (motor)
+Monot = XPS1:m4 (motor)
+
+#15IDC-Incident_Arm
+IH = 15IDC:m52 (motor)
+IR = 15IDC:m53 (motor)
+S1L = 15IDC:m33 (motor)
+S1R = 15IDC:m34 (motor)
+S1T = 15IDC:m31 (motor)
+S1B = 15IDC:m32 (motor)
+
+#15IDC-Sample_Table
+SH = XPS1:m5 (motor)
+STH = 15IDC:m21 (motor)
+SX = 15IDC:m25 (motor)
+
+#15IDC-Detector_Column
+OH = 15IDC:m54 (motor)
+OR = 15IDC:m55 (motor)
+OH-GID = 15IDC:m43 (motor)
+OR-GID = 15IDC:m44 (motor)
+DTH = 15IDC:m23 (motor)
+OTH = 15IDC:m51 (motor)
+S2T = 15IDC:m27 (motor)
+S2B = 15IDC:m28 (motor)
+S2L = 15IDC:m29 (motor)
+S2R = 15IDC:m30 (motor)
+S3T = 15IDC:m35 (motor)
+S3B = 15IDC:m36 (motor)
+S3L = 15IDC:m37 (motor)
+S3R = 15IDC:m38 (motor)
+S4L = 15IDC:m8 (motor)
+S4R = 15IDC:m15 (motor)
+S4T = 15IDC:m41 (motor)
+S4B = 15IDC:m42 (motor)
+S5L = 15IDC:m16 (motor)
+S5R = 15IDC:m22 (motor)
+S7B = 15IDC:m9 (motor)
+S7T = 15IDC:m10 (motor)
+S7L = 15IDC:m12 (motor)
+S7R = 15IDC:m11 (motor)
+
+#15IDC-HHRM
+M_1st_Height = 15IDC:m67 (motor)
+M_2nd_Height = 15IDC:m24 (motor)
+M_1st_Pitch = 15IDC:m65 (motor)
+M_2nd_Pitch = 15IDC:m66 (motor)
+M_Trans = 15IDC:m69 (motor)
+
+#Beamline-Slits
+JJB-Bot = 15IDB:m13 (motor)
+JJB-Top = 15IDB:m14 (motor)
+JJB-OutB = 15IDB:m8 (motor)
+JJB-InB = 15IDB:m7 (motor)
+JJC-Top = 15IDC:m39 (motor)
+JJC-Bot = 15IDC:m40 (motor)
+JJC-Left = 15IDC:m49 (motor)
+JJC-Right = 15IDC:m50 (motor)
+JJD-Top = 15IDD:m21 (motor)
+JJD-Bot = 15IDD:m22 (motor)
+JJD-OutB = 15IDD:m23 (motor)
+JJD-InB = 15IDD:m24 (motor)
+
+
 
 
 
