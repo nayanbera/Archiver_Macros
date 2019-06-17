@@ -109,19 +109,7 @@ class Archiver_Viewer(QMainWindow):
             self.mplWidget.canvas.draw()
         pl.gcf().autofmt_xdate()
 
-        #self.Mplwidget.canvas.axes.tick_params(axis='y', labelcolor=color)
 
-        # ax2 = ax1.twinx()  # instantiate a second axes that shares the same x-axis
-        #
-        # color = 'tab:blue'
-        # ax2.set_ylabel(pvs[1], color=color)  # we already handled the x-label with ax1
-        # ax2.plot(x[pvs[1]], y[pvs[1]], color=color)
-        # ax2.tick_params(axis='y', labelcolor=color)
-        #
-        # pl.gcf().autofmt_xdate()
-        #
-        # fig.tight_layout()  # otherwise the right y-label is slightly clipped
-        # pl.show()
 
 if __name__=='__main__':
     app = QApplication(sys.argv)
