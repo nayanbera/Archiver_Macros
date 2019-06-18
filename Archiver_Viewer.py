@@ -31,6 +31,7 @@ class Archiver_Viewer(QMainWindow):
         self.checkMotor=self.readPV.checkMotor
         self.update_pvTree()
         self.init_signals()
+        self.unit={}
 
     def init_signals(self):
         self.fetchDataPushButton.clicked.connect(self.fetchData)
@@ -130,12 +131,13 @@ class Archiver_Viewer(QMainWindow):
     def exportData(self):
         if bool(self.unit):
             self.dir=QFileDialog.getExistingDirectory(self,'Select a directory to save data')
-            for pv in self.unit.keys():
-                fheader='Data saved on %s\n'%(time.asctime())
-                fheader+='col_names=["time[secs]","pv[%s]"]'%self.unit[pv]
-                fname=pv+'_%s.txt'%(time.strftime('%Y%m%d'))
-                fname=os.path.join(self.dir,fname.replace(':','_'))
-                pl.savetxt(fname,self.datafull[pv],header=fheader,comments='#')
+            if self.dir!='':
+                for pv in self.unit.keys():
+                    fheader='Data saved on %s\n'%(time.asctime())
+                    fheader+='col_names=["time[secs]","pv[%s]"]'%self.unit[pv]
+                    fname=pv+'_%s.txt'%(time.strftime('%Y%m%d'))
+                    fname=os.path.join(self.dir,fname.replace(':','_'))
+                    pl.savetxt(fname,self.datafull[pv],header=fheader,comments='#')
         else:
             QMessageBox.warning(self,'Data Error','No data fetched to save',QMessageBox.Ok)
 
