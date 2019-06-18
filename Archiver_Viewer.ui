@@ -147,9 +147,9 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="updateDataPushButton">
+         <widget class="QPushButton" name="fetchDataPushButton">
           <property name="text">
-           <string>Update Data</string>
+           <string>Fetch Data</string>
           </property>
          </widget>
         </item>
