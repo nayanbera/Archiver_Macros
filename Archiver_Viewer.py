@@ -75,17 +75,23 @@ class Archiver_Viewer(QMainWindow):
             pv=item.text(1)
             # url='http://164.54.162.104:17668/retrieval/data/getData.json?pv=15ID:BLEPS:TEMP1_CURRENT&from=2019-06-17T13:20:00%%C2%B10700&to=2019-06-17T14:20:00%%C2%B10700'
             url = 'http://164.54.162.104:17668/retrieval/data/getData.json?pv=%s&from=%s&to=%s' % (pv, fr, to)
+            print(url)
             http = urllib3.PoolManager()
             r = http.request('GET', url)
-            # try:
-            data = json.loads(r.data)
-            self.unit[pv] = data[0]['meta']['EGU']
+            try:
+                data = json.loads(r.data)
+            except:
+                QMessageBox.warning(self,'Fetch Error','The data from %s cannot be obtained from the server'%pv,QMessageBox.Ok)
+                return
+            try:
+                self.unit[pv] = data[0]['meta']['EGU']
+            except:
+                self.unit[pv] = 'NA'
             self.xraw[pv]=pl.array([item['secs'] for item in data[0]['data']])
             self.x[pv] = pl.array([datetime.datetime.fromtimestamp(item['secs']) for item in data[0]['data']],dtype='datetime64')
             self.y[pv] = pl.array([item['val'] for item in data[0]['data']])
             self.datafull[pv]=pl.vstack((self.xraw[pv],self.y[pv]))
-            # except:
-            #     QMessageBox.warning(self,'Fetch Error','The data from %s cannot be obtained from the server'%pv,QMessageBox.Ok)
+            
             prg_dlg.setValue(i + 1)
         if bool(self.unit):
             self.updatePlot()
