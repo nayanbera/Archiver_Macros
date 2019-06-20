@@ -116,15 +116,13 @@ class Archiver_Viewer(QMainWindow):
             self.mplWidget.canvas.axes.set_ylabel(pv[0]+'[%s]'%self.unit[pv[0]],color=color)
             self.mplWidget.canvas.axes.step(self.x[pv[0]], self.y[pv[0]],color=color,label=pv)
             self.mplWidget.canvas.axes.tick_params(axis='y',labelcolor=color)
-            try:
-                self.axes2.clear()
-            except:
-                self.axes2=self.mplWidget.canvas.axes.twinx()
+            self.axes2=self.mplWidget.canvas.axes.twinx()
             color = 'tab:blue'
             self.axes2.set_ylabel(pv[1]+'[%s]'%self.unit[pv[1]], color=color)
             self.axes2.step(self.x[pv[1]], self.y[pv[1]],color=color, label=pv)
             self.axes2.tick_params(axis='y', labelcolor=color)
         self.mplWidget.canvas.draw()
+        self.mplWidget.canvas.flush_events()
         pl.gcf().autofmt_xdate()
 
     def exportData(self):
