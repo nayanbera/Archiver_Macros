@@ -86,7 +86,7 @@ class Archiver_Viewer(QMainWindow):
             try:
                 self.unit[pv] = data[0]['meta']['EGU']
             except:
-                self.unit[pv] = 'NA'
+                self.unit[pv] = 'Unit Not Available'
             self.xraw[pv]=pl.array([item['secs'] for item in data[0]['data']])
             self.x[pv] = pl.array([datetime.datetime.fromtimestamp(item['secs']) for item in data[0]['data']],dtype='datetime64')
             self.y[pv] = pl.array([item['val'] for item in data[0]['data']])
