@@ -9,6 +9,7 @@ import sys
 from ReadPVList import ReadPVList
 import time
 import os
+from epics import caget, caput
 
 
 class Archiver_Viewer(QMainWindow):
@@ -36,6 +37,7 @@ class Archiver_Viewer(QMainWindow):
     def init_signals(self):
         self.fetchDataPushButton.clicked.connect(self.fetchData)
         self.exportDataPushButton.clicked.connect(self.exportData)
+        self.restorePVsPushButton.clicked.connect(self.restorePVs)
 
 
     def update_pvTree(self):
@@ -90,11 +92,21 @@ class Archiver_Viewer(QMainWindow):
             self.xraw[pv]=pl.array([item['secs'] for item in data[0]['data']])
             self.x[pv] = pl.array([datetime.datetime.fromtimestamp(item['secs']) for item in data[0]['data']],dtype='datetime64')
             self.y[pv] = pl.array([item['val'] for item in data[0]['data']])
-            self.datafull[pv]=pl.vstack((self.xraw[pv],self.y[pv]))
-            
+            self.datafull[pv]=pl.vstack((self.xraw[pv],self.y[pv])).T
+            try:
+                item.removeChild(item.child(0))
+            except:
+                pass
+            pvLastPos=QTreeWidgetItem(['%.6f(a)'%self.y[pv][-1], '%.6f(c)'%caget(pv)])
+            item.addChild(pvLastPos)
             prg_dlg.setValue(i + 1)
         if bool(self.unit):
             self.updatePlot()
+
+    def restorePVs(self):
+        items=self.pvTreeWidget.selectedItems()
+        for item in items:
+            caput(item.text(1),float(item.child(0).text(1).split('(')[0]))
 
     def updatePlot(self):
         try:

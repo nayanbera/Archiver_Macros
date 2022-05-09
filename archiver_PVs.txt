@@ -13,6 +13,9 @@ IG02 = 15IDA:hc2
 IG03 = 15IDA:hc3
 IG04 = 15IDA:hc4
 
+#15ID-PSS
+Water-flow = PA:15ID:CHANNEL_1_CALC
+
 #15IDA-Temperatures
 1st-Crystal-InB(Si-311) = 15ID:BLEPS:TEMP1_CURRENT
 1st-Crystal-OutB(Si-111) = 15ID:BLEPS:TEMP2_CURRENT
@@ -45,7 +48,7 @@ HHL-Hor-Slit-Dwn = 15IDA:m19 (motor)
 HHL-Vert-Slit-Dwn = 15IDA:m20 (motor)
 
 #15IDA-Monochromator
-Bragg-H = 5IDA:BraggHAO
+Bragg-H = 15IDA:BraggHAO
 Bragg-K = 15IDA:BraggKAO
 Bragg-L = 15IDA:BraggLAO
 Bragg-a = 15IDA:BraggAAO
@@ -184,6 +187,131 @@ JJD-Top = 15IDD:m21 (motor)
 JJD-Bot = 15IDD:m22 (motor)
 JJD-OutB = 15IDD:m23 (motor)
 JJD-InB = 15IDD:m24 (motor)
+JJB-H-Size= 15IDB:Slit2Hsize
+JJB-V-Size= 15IDB:Slit2Vsize
+JJB-H-Center = 15IDB:Slit2Hcenter
+JJB-V-Center = 15IDB:Slit2Vcenter
+JJC-H-Size= 15IDC:Slit4HDsize
+JJC-V-Size= 15IDD:Slit4VDsize
+JJC-H-Center = 15IDC:Slit4HDcenter
+JJC-V-Center = 15IDD:Slit4VDcenter
+JJD-H-Size= 15IDD:Slit1Hsize
+JJD-V-Size= 15IDD:Slit1Vsize
+JJD-H-Center = 15IDD:Slit1Hcenter
+JJD-V-Center = 15IDD:Slit1Vcenter
+
+#Gasfarm
+Helium-Pressure = 15IDA:HELIUM_PRESSURE
+Argon-Pressure = 15IDA:ARGON_PRESSURE
+Nitrogen-Pressure = 15IDA:NITROGEN_PRESSURE
+UserGas-Pressure = 15IDA:USERGAS_PRESSURE
+
+#15IDB-Vacuum
+Vacuum = 15IDB:Unidig1Bi22
+
+#15IDD-SAXS_Motors
+SR-Z = 15IDD:m1 (motor)
+SR-X = 15IDD:m2 (motor)
+SR-Y = 15IDD:m3 (motor)
+SFX = 15IDD:m4 (motor)
+SFY-I = 15IDD:m5 (motor)
+SFY-O = 15IDD:m6 (motor)
+CMIR = 15IDD:m7 (motor)
+SpLX = 15IDD:m8 (motor)
+BS-X = 15IDD:m9 (motor)
+BS-Y = 15IDD:m10 (motor)
+BPM-X = 15IDD:m11 (motor)
+BPM-Y = 15IDD:m12 (motor)
+c1m5 = 15IDD:m13 (motor)
+Coll-X = 15IDD:m14 (motor)
+Coll-Y = 15IDD:m15 (motor)
+c1m8 = 15IDD:m16 (motor)
+Coll-YAW = 15IDD:m17 (motor)
+Sp-Y = 15IDD:m18 (motor)
+Sp-X = 15IDD:m19 (motor)
+Dx = 15IDD:m20 (motor)
+
+#15IDD-Xtal_Motors
+Kappa-Axis = 15IDD:m26 (motor)
+T6-47-Y1 = 15IDD:m27 (motor)
+T6-47-Y2 = 15IDD:m28 (motor)
+T6-47-Y3 = 15IDD:m29 (motor)
+T6-47-X1 = 15IDD:m30 (motor)
+T6-47-Z2 = 15IDD:m31 (motor)
+T6-47-Z1 = 15IDD:m32 (motor)
+Tab-Trans = 15IDD:m33 (motor)
+Omega-Axis = 15IDD:m35 (motor)
+BeamStop = 15IDD:m36 (motor)
+M_1stPitch = 15IDD:m37 (motor)
+M_2ndPitch = 15IDD:m38 (motor)
+M_1stHight = 15IDD:m39 (motor)
+M_2ndHight = 15IDD:m40 (motor)
+Xtal-BPM-X = 15FPGA:m27 (motor)
+KB_Table_Yaw = 15FPGA:m28 (motor)
+KB_Table_Y = 15FPGA:m29 (motor)
+KB-Table-X = 15FPGA:m30 (motor)
+ADC_SlitIn = 15FPGA:m37 (motor)
+ADC_SlitOut = 15FPGA:m38 (motor)
+ADC_SlitB = 15FPGA:m39 (motor)
+ADC_SlitT = 15FPGA:m40 (motor)
+KB_Vert_Mirror_Y_Pos = 15FPGA:m49 (motor)
+KB_Vert_Mirror_Rotation = 15FPGA:m50 (motor)
+KB_Vert_Force_UpStream = 15FPGA:m51 (motor)
+KB_Vert_Force_DownStream = 15FPGA:m52 (motor)
+KB_Hor_Mirror_X_Pos = 15FPGA:m53 (motor)
+KB_Hor_Mirror_Rotation = 15FPGA:m54 (motor)
+KB_Hor_Force_UpStream = 15FPGA:m55 (motor)
+KB_Hor_Force_DownStream = 15FPGA:m56 (motor)
+
+#15ID-PreAmps
+15IDB_A1_Sens = 15IDB:A1sens_num
+15IDB_A1_Sens_Unit = 15IDB:A1sens_unit
+15IDB_A1_Offset = 15IDB:A1offset_num
+15IDB_A1_Offset_Unit = 15IDB:A1offset_unit
+15IDB_A2_Sens_num = 15IDB:A2sens_num
+15IDB_A2_Sens_Unit = 15IDB:A2sens_unit
+15IDB_A2_Offset = 15IDB:A2offset_num
+15IDB_A2_Offset_Unit = 15IDB:A2offset_unit
+15IDC_A2_Sens_num = 15IDC:A2sens_num
+15IDC_A2_Sens_Unit = 15IDC:A2sens_unit
+15IDC_A2_Offset = 15IDC:A2offset_num
+15IDC_A2_Offset_Unit = 15IDC:A2offset_unit
+15IDC_A3_Sens_num = 15IDC:A3sens_num
+15IDC_A3_Sens_Unit = 15IDC:A3sens_unit
+15IDC_A3_Offset = 15IDC:A3offset_num
+15IDC_A3_Offset_Unit = 15IDC:A3offset_unit
+15IDD_Ion_Sens = 15IDD:ionch:sens_num
+15IDD_Ion_Sens_Unit = 15IDD:ionch:sens_unit
+15IDD_Xtal_Ion_Sens = 15IDD:ionch2:sens_num
+15IDD_Xtal_Ion_Sens_Unit = 15IDD:ionch2:sens_unit
+15IDD_BPD_Sens = 15IDD:bpm1:sens_num
+15IDD_BPD_Sens_Unit = 15IDD:bpm1:sens_unit
+15IDD_TPD_Sens = 15IDD:bpm3:sens_num
+15IDD_TPD_Sens_Unit = 15IDD:bpm3:sens_unit
+15IDD_MPD_Sens = 15IDD:bpm2:sens_num
+15IDD_MPD_Sens_Unit = 15IDD:bpm2:sens_unit
+
+
+#15ID-Attenuators
+15IDC_Attenuator = 15IDC:atten1
+15IDD_Cu_Attenuator = 15IDD:atten1Move
+15IDD_Al_Attenuator = 15IDD:atten2Move
+
+#15IDA-Cryo
+Forward_Temp(K)-T_fwd=P:CC:T:FWD:STAT
+Return_Temp(K)-T_ret=P:CC:T:RET:STAT
+Avg_Forward_Pressure_Value(bar)-P_fwd=P:CC:P:FWD:STAT
+LN2_Flow(l/min)-F_ret=P:CC:F:RET:STAT
+Avg_PV_Pressure_Value(bar)-P_pv=P:CC:P:PV:STAT
+Consumed_power(W)-consumer=P:CC:power
+Bypass_Valve_Status(%)-V_byp=P:CC:V:BYP:STAT
+Avg_LN2_Level_PV(%)-L_pv=P:CC:L:PV:STAT
+Avg_LN2_Level_SC(%)-L_sc_=P:CC:L:SC:STAT
+Pump_Freq(Hz)=P:CC:FQ:P:STAT
+
+#15IDC-DBPM-Motors
+15IDC_Pihole_Y_Kohzu = 15IDC:m3 (motor)
+15IDC_Pihole_X = 15IDC:m1 (motor)
 
 
 
