@@ -85,28 +85,45 @@ class Archiver_Viewer(QMainWindow):
             except:
                 QMessageBox.warning(self,'Fetch Error','The data from %s cannot be obtained from the server'%pv,QMessageBox.Ok)
                 return
-            try:
-                self.unit[pv] = data[0]['meta']['EGU']
-            except:
-                self.unit[pv] = 'Unit Not Available'
-            self.xraw[pv]=pl.array([item['secs'] for item in data[0]['data']])
-            self.x[pv] = pl.array([datetime.datetime.fromtimestamp(item['secs']) for item in data[0]['data']],dtype='datetime64')
-            self.y[pv] = pl.array([item['val'] for item in data[0]['data']])
-            self.datafull[pv]=pl.vstack((self.xraw[pv],self.y[pv])).T
-            try:
-                item.removeChild(item.child(0))
-            except:
-                pass
-            pvLastPos=QTreeWidgetItem(['%.6f(a)'%self.y[pv][-1], '%.6f(c)'%caget(pv)])
-            item.addChild(pvLastPos)
-            prg_dlg.setValue(i + 1)
+            if data==[]:
+                QMessageBox.warning(self, 'No Data', 'Data not recorded for %s' % pv, QMessageBox.Ok)
+                prg_dlg.setValue(i + 1)
+            elif data[0]['data'] == []:
+                QMessageBox.warning(self, 'No Data', 'Data not recorded for %s' % pv, QMessageBox.Ok)
+                prg_dlg.setValue(i + 1)
+            else:
+                try:
+                    self.unit[pv] = data[0]['meta']['EGU']
+                except:
+                    self.unit[pv] = 'Unit Not Available'
+                self.xraw[pv]=pl.array([item['secs'] for item in data[0]['data']])
+                self.x[pv] = pl.array([datetime.datetime.fromtimestamp(item['secs']) for item in data[0]['data']],dtype='datetime64')
+                self.y[pv] = pl.array([item['val'] for item in data[0]['data']])
+                self.datafull[pv]=pl.vstack((self.xraw[pv],self.y[pv])).T
+                try:
+                    item.removeChild(item.child(0))
+                except:
+                    pass
+                pvLastPos=QTreeWidgetItem(['%.6f(a)'%self.y[pv][-1], '%.6f(c)'%caget(pv)])
+                item.addChild(pvLastPos)
+                prg_dlg.setValue(i + 1)
         if bool(self.unit):
             self.updatePlot()
 
     def restorePVs(self):
         items=self.pvTreeWidget.selectedItems()
+        msg='\n'
         for item in items:
-            caput(item.text(1),float(item.child(0).text(1).split('(')[0]))
+            msg+=item.text(1)+'\n'
+        btnResponse=QMessageBox.question(self.self,'Restore Warning', 'Are you sure you would like to restore the following PVs?'+msg,QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+        if btnResponse == QMessageBox.Yes:
+            for item in items:
+                caput(item.text(1).split('.')[0]+'.SET',1)
+                if item.text(1)[-3:]=='RBV':
+                    caput(item.text(1)[:-3]+'VAL',float(item.child(0).text(0).split('(')[0]))
+                else:
+                    caput(item.text(1),float(item.child(0).text(0).split('(')[0]))
+                caput(item.text(1).split('.')[0] + '.SET', 0)
 
     def updatePlot(self):
         try:
