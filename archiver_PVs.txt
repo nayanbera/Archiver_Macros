@@ -97,10 +97,14 @@ Channel14 = Bimorph_VFM:GET-VOUT14
 Channel15 = Bimorph_VFM:GET-VOUT15
 
 #15IDB-CRL
-CRL-mAX = 15IDB:m57 (motor)
-CRL-mAY = 15IDB:m58 (motor)
-CRL-mX = 15IDB:m59 (motor)
-CRL-mY = 15IDB:m60 (motor)
+CRL-mAX_old= 15IDB:m57 (motor)
+CRL-mAY_old = 15IDB:m58 (motor)
+CRL-mX_old = 15IDB:m59 (motor)
+CRL-mY_old = 15IDB:m60 (motor)
+CRL-mX = CRL15Straight:m1 (motor)
+CRL-mY = CRL15Straight:m2 (motor)
+CRL-mAX = CRL15Straight:m3 (motor)
+CRL-mAY = CRL15Straight:m5 (motor)
 CRL-C1-Len1 = 15IDB:m41 (motor)
 CRL-C1-Len2 = 15IDB:m42 (motor)
 CRL-C1-Len3 = 15IDB:m43 (motor)
