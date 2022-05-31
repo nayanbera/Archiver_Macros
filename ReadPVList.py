@@ -3,11 +3,21 @@ import os
 
 class ReadPVList(object):
     def __init__(self,fname=None):
-        self.motorParams={'User':'RBV','Dial':'DRBV','Offset':'OFF','Direction':'DIR','MotorPos':'RMP',
+        self.motorParams={'User':'RBV',
+                          'Dial':'DRBV',
+                          'Offset':'OFF',
+                          'Direction':'DIR',
+                          'MaxSpeed':'VMAX',
+                          'Speed':'VELO',
+                          'BaseSpeed':'VBAS',
+                          'Accel':'ACCL',
+                          'BacklashDistance':'BDST',
+                          'MotorPos':'RMP',
                           'EncoderPos':'REP',
                           'UseEncoder':'UEIP',
                           'MotorRes':'MRES',
-                          'EncoderRes':'ERES'}
+                          'EncoderRes':'ERES',
+                          'Error':'DIFF'}
         self.data_server='http://chemmat104.cars.aps.anl.gov:17668'
         self.webpath=self.data_server+'/retrieval/ui/'
         self.htmlfolder='/opt/archappl/retrieval/webapps/retrieval/ui/'
